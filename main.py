@@ -4,6 +4,7 @@ from PIL import Image
 import cv2
 import numpy as np
 
+
 # Function to load known faces from the dataset
 def load_known_faces(people_folder):
     known_face_encodings = {}
@@ -18,6 +19,7 @@ def load_known_faces(people_folder):
                 if len(face_encodings) > 0:
                     known_face_encodings[person_name].append(face_encodings[0])
     return known_face_encodings
+
 
 # Function to recognize faces in the input image
 def recognize_faces(image_path, known_face_encodings):
@@ -46,6 +48,7 @@ def recognize_faces(image_path, known_face_encodings):
     os.makedirs("output", exist_ok=True)
     cv2.imwrite(f"output/{image_name}", original_image)
 
+
 # Paths
 people_folder = "PeopleData"  # Update this with your dataset path
 input_images_path = "input/"  # Update this with your input image path
@@ -54,10 +57,9 @@ input_images_path = "input/"  # Update this with your input image path
 known_face_encodings = load_known_faces(people_folder)
 
 for input_image_name in os.listdir(input_images_path):
-
     # Recognize faces in the input image and save them in respective folders
     input_image_path = os.path.join(input_images_path, input_image_name)
-    
-    recognize_faces( input_image_path, known_face_encodings)
+
+    recognize_faces(input_image_path, known_face_encodings)
 
     print(input_image_path, " - Done!")
